@@ -14,12 +14,13 @@ cheat <- function(exercise) {
   for (i in solutions[, 1]) {
     if (i == "-----------------------------------------------------------------------") {
       exercise_counter = exercise_counter + 1
-    }
-    if (exercise_counter == exercise) {
-      answer <- paste(answer, i, sep = "\n")
-    }
-    if (exercise_counter > exercise)
-      break
+    } else {
+      if (exercise_counter == exercise) {
+        answer <- paste(answer, i, sep = "\n")
+      }
+      if (exercise_counter > exercise)
+        break
+      }
   }
   cat(answer)
 }
