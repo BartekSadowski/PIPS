@@ -8,7 +8,7 @@ remind_me <- function(){
 }
 
 cheat <- function(exercise) {
-  solutions <- read.delim(file = "solutions.txt", header = FALSE, sep = "\n", quote = "")
+  solutions <- read.delim(file = "https://raw.githubusercontent.com/BartekSadowski/PIPS/main/solutions.txt", header = FALSE, sep = "\n", quote = "")
   exercise_counter = 0
   answer = ""
   for (i in solutions[, 1]) {
