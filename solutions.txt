@@ -44,7 +44,7 @@ hist(
   las = 1
 )  
 
-# Q3.1.2 -----------------------------------------------------------------------
+-----------------------------------------------------------------------
 
 # Scatterplot of the minimum temperature measured at Schiphol Airport over the
 # last 70 years
@@ -69,7 +69,7 @@ plot(temp$DATE,
      xlab = "Year",
      ylab = "Temperature [°C]") 
 
-# Q3.1.3 -----------------------------------------------------------------------
+-----------------------------------------------------------------------
 
 # Install and load the ggplot2 package
 install.packages("ggplot2")
@@ -88,7 +88,7 @@ ggplot(titanic_train, aes(Sex))+
   scale_fill_discrete(name = "How did it go?", labels = c("dead", "alive"))
 # I did not change the colours becasue they are as in the assignment by default
 
-# Q3.1.4 -----------------------------------------------------------------------
+-----------------------------------------------------------------------
 
 # Trying out different themes from ggplot for the previous plot.
 
@@ -151,7 +151,7 @@ ggplot(titanic_train, aes(Sex))+
 # it does not have an unnecessary frame that would only clutter the plot and its
 # background is white so it does not divert attention from the plot itself.
 
-# Q3.1.5 -----------------------------------------------------------------------
+-----------------------------------------------------------------------
 
 # The plot form the assignment
 plot(cars$speed, cars$dist)
@@ -184,7 +184,7 @@ abline(lm(cars$dist ~ cars$speed))
 #3. I rotated values on the y axis so that they are more comfortable to read
 #now. It is done by adding las=1 as an argument.
 
-# Q3.1.6 -----------------------------------------------------------------------
+-----------------------------------------------------------------------
 
 # Recreate the ggplot showing the maximum weight of a few chickens
 
@@ -203,7 +203,7 @@ ggplot(data = max_weight, aes(x = Group.1, y = x)) +
   scale_x_discrete(limits = c("1", "20", "5", "40", "19")) +
   xlab("chick") + ylab("max_weight")  # change the axis labels
 
-# Q3.1.7 -----------------------------------------------------------------------
+-----------------------------------------------------------------------
 
 # Recreate the ggplot with the cars dataset
 
@@ -213,7 +213,7 @@ ggplot(data = cars, aes(x=speed, y=dist)) +  # what data are to be plotted
   geom_point() +  # the scatter plot part
   geom_smooth(method = "loess", formula = "y ~ x")  # the fitted line part
 
-# Q3.1.8 -----------------------------------------------------------------------
+-----------------------------------------------------------------------
 
 # Adding a second plot next to the plot from exercise Q3.1.6 showing the
 # development of the individual chickens’ over time
@@ -250,7 +250,7 @@ p2 <- ggplot(data = chicks, aes(x=Time, y=weight, colour=Chick)) +
 
 p1 + p2  # Combine these two plots
 
-# Q3.1.9 -----------------------------------------------------------------------
+-----------------------------------------------------------------------
 
 # Install and load the package
 install.packages("ggstatsplot")
@@ -270,7 +270,7 @@ ggbetweenstats(ToothGrowth, supp, len,
 # vitamin C through orange juice (mean = 20.66) or meds (mean = 16.96)
 # (Welch's t=1.92, p=0.06).
 
-# Q3.1.10 -----------------------------------------------------------------------
+-----------------------------------------------------------------------
 
 # Install and load the package plotly
 install.packages("plotly")
@@ -297,7 +297,7 @@ fig <-
 
 fig # Show the plot
 
-# Q3.1.11 -----------------------------------------------------------------------
+-----------------------------------------------------------------------
 
 # Install and load the ggaminate package that allows to make animated plots.
 install.packages("gganimate")
@@ -330,7 +330,7 @@ dynamic_plot <- ggplot(downloads, aes(x=date, y=count, colour=package)) +
   transition_reveal(along=date)  # Animate the plot
 animate(dynamic_plot, renderer = gifski_renderer())  # Show the plot
 
-# Q3.1.12 -----------------------------------------------------------------------
+-----------------------------------------------------------------------
 
 # plot the price of a stock in 2023 that increased that year
 
@@ -353,7 +353,7 @@ chart_Series(NVDA, subset="2023") # Plot only prices from 2023
 # semiconductor chips. Their products relates mainly to graphic computation and
 # artificial intelligence. 
 
-# Q3.1.13 -----------------------------------------------------------------------
+-----------------------------------------------------------------------
 
 # The plotstock function that takes as arguments a stock symbol, a year,
 # and a new file name. The function creates a plot of the given stock’s price
@@ -378,7 +378,7 @@ plotstock <- function(
 
 plotstock("F", "2011")
 
-# Q3.1.14 -----------------------------------------------------------------------
+-----------------------------------------------------------------------
 
 # Q3.1.1. improved
 
@@ -463,7 +463,7 @@ animate(dynamic_plot, renderer = gifski_renderer())
 #4. Delete comments that are redundant to people how know R
 #5. Packages left
 
-# Q3.1.15 -----------------------------------------------------------------------
+-----------------------------------------------------------------------
 
 # The code from the assignment
 a <- "dog"
@@ -491,15 +491,15 @@ v(a)
 #4. The return function should go in its own {} block in its own line
 #5. TRUE is prefered over T
 
-# Q3.1.16 -----------------------------------------------------------------------
+-----------------------------------------------------------------------
 
 matrix(c(1:9), nrow = 3, ncol = 3, byrow = TRUE) * c(1,2,3)
 
-# Q3.1.17 -----------------------------------------------------------------------
+-----------------------------------------------------------------------
 
 # Ctrl + Shift + A
 
-# Q3.1.18 -----------------------------------------------------------------------
+-----------------------------------------------------------------------
 
 # Install and load the memery package that allows making memes in R
 install.packages("memery")
