@@ -1,0 +1,537 @@
+# Simulation of realistic grades for the programming exam
+
+# First, consider what does "realistic grades" mean
+# The grades have to be between 1 and 10 and they have to be rounded off to half
+# numbers
+# The mean grade should be somewhere around 7-7.5
+# The grades like 1, 2 and 3 should be very rare, and the grades as 9.5 and 10
+#should be quite rare as well
+
+# The normal distribution with the mean of 7.5 and the standard deviation of 1.5
+#that is truncated so that there are not values lower than 1 and higher than 10
+#seems to roughly fulfill the criteria above
+
+# Notice that the real mean of such a distribution will be lower than 7.5
+#because the truncation is not symmetric. The distance between the mean and the
+#lower bound is larger than the distance between the mean and the upper bound.
+#Over representation of lower values will drive the mean towards values lower
+#than 7.5
+
+grades <- numeric(0) # create an empty vector for grades
+# Generate 70 grades (there are 70 of us registered for the PIPS course)
+for(i in 1:70) 
+{
+  grade = 0  # Initially the grade is zero to initialise the loop
+  while(grade < 1 | grade > 10){
+    # Draw a grade from the normal distribution with mean 7.5 and sd = 1.5. If
+    #the drawn grade is lower than 1 or higher than 10, draw again and do so as
+    #long as this condition is not met
+    grade <- rnorm(1, mean = 7.5, sd = 1.5)
+  }
+  grades <- c(grades, grade)  # Save the grade in the vector of grades
+}
+
+# Grades are doubled in order to round them to the closest integer, and they are
+# halved again. The outcome are the grades rounded off to half numbers
+grades <- round(grades * 2)/2  
+
+# Create a histogram of the simulated grades
+hist(
+  grades,
+  main = "Grades from programming exam",
+  xlab = "Grades",
+  ylab = "Frequency",
+  las = 1
+)  
+
+# Q3.1.2 -----------------------------------------------------------------------
+
+# Scatterplot of the minimum temperature measured at Schiphol Airport over the
+# last 70 years
+
+temp <- read.csv("https://bit.ly/3GLVQ86")  # load the data
+
+head(temp)  #Let's take a look what is in the data
+
+# Let's see if Schiphol is the only place where temperature was meassured.
+unique(temp$NAME) # Answer: yes
+
+# Let's see what dates are in the data
+dim.data.frame(temp)
+min(temp$DATE)
+max(temp$DATE)
+# The temperature was measured over 70 years from 1951 to 2021 (in 2021 it's NA)
+
+# The scatter plot
+plot(temp$DATE,
+     temp$TMIN,
+     main = "Minimum temperature at Schiphol Airport between 1951 and 2020",
+     xlab = "Year",
+     ylab = "Temperature [°C]") 
+
+# Q3.1.3 -----------------------------------------------------------------------
+
+# Install and load the ggplot2 package
+install.packages("ggplot2")
+library(ggplot2)
+
+# Install and load the titanic package
+install.packages("titanic")
+library(titanic)
+
+?titanic_train  # What is in the titanic_train dataset
+head(titanic_train)
+
+# The recreated barplot
+ggplot(titanic_train, aes(Sex))+
+  geom_bar(aes(fill=factor(Survived))) +
+  scale_fill_discrete(name = "How did it go?", labels = c("dead", "alive"))
+# I did not change the colours becasue they are as in the assignment by default
+
+# Q3.1.4 -----------------------------------------------------------------------
+
+# Trying out different themes from ggplot for the previous plot.
+
+# theme_grey (or theme_gray)
+ggplot(titanic_train, aes(Sex))+
+  geom_bar(aes(fill=factor(Survived))) +
+  scale_fill_discrete(name = "How did it go?", labels = c("dead", "alive")) +
+  theme_grey()
+
+# theme_bw
+ggplot(titanic_train, aes(Sex))+
+  geom_bar(aes(fill=factor(Survived))) +
+  scale_fill_discrete(name = "How did it go?", labels = c("dead", "alive")) +
+  theme_bw()
+
+# theme_linedraw()
+ggplot(titanic_train, aes(Sex))+
+  geom_bar(aes(fill=factor(Survived))) +
+  scale_fill_discrete(name = "How did it go?", labels = c("dead", "alive")) +
+  theme_linedraw()
+
+# theme_light()
+ggplot(titanic_train, aes(Sex))+
+  geom_bar(aes(fill=factor(Survived))) +
+  scale_fill_discrete(name = "How did it go?", labels = c("dead", "alive")) +
+  theme_light()
+
+# theme_dark()
+ggplot(titanic_train, aes(Sex))+
+  geom_bar(aes(fill=factor(Survived))) +
+  scale_fill_discrete(name = "How did it go?", labels = c("dead", "alive")) +
+  theme_dark()
+
+# theme_minimal()
+ggplot(titanic_train, aes(Sex))+
+  geom_bar(aes(fill=factor(Survived))) +
+  scale_fill_discrete(name = "How did it go?", labels = c("dead", "alive")) +
+  theme_minimal()
+
+# theme_classic()
+ggplot(titanic_train, aes(Sex))+
+  geom_bar(aes(fill=factor(Survived))) +
+  scale_fill_discrete(name = "How did it go?", labels = c("dead", "alive")) +
+  theme_classic()
+
+# theme_void()
+ggplot(titanic_train, aes(Sex))+
+  geom_bar(aes(fill=factor(Survived))) +
+  scale_fill_discrete(name = "How did it go?", labels = c("dead", "alive")) +
+  theme_void()
+
+# theme_test()
+ggplot(titanic_train, aes(Sex))+
+  geom_bar(aes(fill=factor(Survived))) +
+  scale_fill_discrete(name = "How did it go?", labels = c("dead", "alive")) +
+  theme_test()
+
+# In my opinion theme_minimal is the best theme because its light grey grid
+# allows to easily read the values on the plot but also does not overload it,
+# it does not have an unnecessary frame that would only clutter the plot and its
+# background is white so it does not divert attention from the plot itself.
+
+# Q3.1.5 -----------------------------------------------------------------------
+
+# The plot form the assignment
+plot(cars$speed, cars$dist)
+
+# What does those variables mean?
+? cars
+? plot
+# The impoved plot
+plot(
+  cars$speed,
+  cars$dist,
+  main = "Speed of cars and distances taken to stop",
+  xlab = "Speed [mph]",
+  ylab = "Stopping distance [ft]",
+  las = 1
+)
+abline(lm(cars$dist ~ cars$speed))
+
+# The improvements:
+
+#1. I added a title and changed the axes labels to more informative ones. It is
+# done by adding the following arguments: main = "Speed of cars and distances
+# taken to stop", xlab = "Speed [mph]" and ylab = "Stopping distance [ft]"
+
+#2. I added the line of the best fit to the plot so that now the trend line is
+# more visible. It is done by using the abline() function in the next line with
+# lm(cars$dist ~ cars$speed) (which stands for linear regression of cars$dist on
+# cars$speed) as its argument.
+
+#3. I rotated values on the y axis so that they are more comfortable to read
+#now. It is done by adding las=1 as an argument.
+
+# Q3.1.6 -----------------------------------------------------------------------
+
+# Recreate the ggplot showing the maximum weight of a few chickens
+
+# What is in the data set and how does it look like
+? ChickWeight
+View(ChickWeight)
+
+# Calculate the max weight of every chick
+max_weight <- aggregate(ChickWeight$weight, list(ChickWeight$Chick), max) 
+# Here the aggregate function takes the weights of the chicks and counts their
+# maximum by a chick
+
+ggplot(data = max_weight, aes(x = Group.1, y = x)) +
+  geom_bar(stat = "identity") +
+  # Here the order of chicks is specified
+  scale_x_discrete(limits = c("1", "20", "5", "40", "19")) +
+  xlab("chick") + ylab("max_weight")  # change the axis labels
+
+# Q3.1.7 -----------------------------------------------------------------------
+
+# Recreate the ggplot with the cars dataset
+
+?cars  # What is in the cats dataset
+
+ggplot(data = cars, aes(x=speed, y=dist)) +  # what data are to be plotted
+  geom_point() +  # the scatter plot part
+  geom_smooth(method = "loess", formula = "y ~ x")  # the fitted line part
+
+# Q3.1.8 -----------------------------------------------------------------------
+
+# Adding a second plot next to the plot from exercise Q3.1.6 showing the
+# development of the individual chickens’ over time
+
+# Install and load the patchwork package to easily combine the plots
+install.packages("patchwork")
+library(patchwork)
+
+# The plot from Q3.1.6
+p1 <- ggplot(data=max_weight, aes(x=Group.1, y=x)) +
+  geom_bar(stat = "identity") +
+  # Here the order of chicks is specified
+  scale_x_discrete(limits=c("1", "20", "5", "40", "19")) +  
+  xlab("chick") + ylab("max_weight")  # change the axis labels
+
+# Towards the second plot
+
+# Subset the ChickWeight data frame to include only the relevant chicks
+chicks <- ChickWeight[ChickWeight$Chick == 1 | ChickWeight$Chick == 20 |
+                        ChickWeight$Chick == 5 | ChickWeight$Chick == 40 |
+                        ChickWeight$Chick == 19,]
+
+# See the order of chicks' IDs that will be propagated to the legend
+levels(chicks$Chick)
+# Change the order to the requested one
+chicks$Chick <- factor(chicks$Chick, levels = c(1, 20, 5, 40, 19))
+
+# Create the plot showing the development of the individual chickens’ over time
+p2 <- ggplot(data = chicks, aes(x=Time, y=weight, colour=Chick)) +
+  geom_line() +
+  # Here I change the title of the legend from "Chick" to "chick" to match the
+  #plot shown in the excercise.
+  labs(color = "chick")  
+
+p1 + p2  # Combine these two plots
+
+# Q3.1.9 -----------------------------------------------------------------------
+
+# Install and load the package
+install.packages("ggstatsplot")
+library(ggstatsplot)
+
+# What is in the dataset ToothGrowth
+?ToothGrowth
+View(ToothGrowth)
+
+# The plot that answers the question
+ggbetweenstats(ToothGrowth, supp, len,
+               title = paste0("Guinea pigs' tooth length underdifferent" , 
+               "forms of vitamin C uptake"))
+
+# Assuming standard significance level of alfa = 0.05, there is no statistically
+# significant difference between guinea pigs' tooth length when they take their
+# vitamin C through orange juice (mean = 20.66) or meds (mean = 16.96)
+# (Welch's t=1.92, p=0.06).
+
+# Q3.1.10 -----------------------------------------------------------------------
+
+# Install and load the package plotly
+install.packages("plotly")
+library(plotly)
+
+# Load the dataset and see what is in there
+human_body <- read.csv("https://shorturl.at/nouyJ")
+View(human_body)
+
+# Recreate the 3D plot
+
+# The data come from the human_bidy dataset loaded above
+# There is total height on x-axis, head circumference on y-axis and shoulder to
+# wrist measure on z-axis. All values are expressed in inches
+# Morover, the markers opacity is specified
+fig <-
+  plot_ly(
+    human_body,
+    x = ~ TotalHeight,
+    y = ~ HeadCircumference,
+    z = ~ ShoulderToWaist
+  ) %>%
+  add_markers(opacity = 0.5)
+
+fig # Show the plot
+
+# Q3.1.11 -----------------------------------------------------------------------
+
+# Install and load the ggaminate package that allows to make animated plots.
+install.packages("gganimate")
+library(gganimate)
+
+# Install and load the cranlogs package that allows to download the data needed
+install.packages("cranlogs")
+library(cranlogs)
+
+# Install and load the gifski package that renders the animated tools in the gif
+# format
+install.packages("gifski")
+library(gifski)
+
+# Download the data about the number of downloads of ggplot2 and plotly packages
+downloads <-
+  cran_downloads(
+    packages = c("ggplot2", "plotly"),
+    from = "2013-07-01",
+    to = "2024-01-23"
+  )
+
+# Create the plot
+
+# the data are from the downloads dataset, there is date on the x-axis and count
+# of the y-axis. The data are presentend by package.
+dynamic_plot <- ggplot(downloads, aes(x=date, y=count, colour=package)) +  
+  geom_line() +
+  theme_bw() +  # Theme as in the plot in the assignment
+  transition_reveal(along=date)  # Animate the plot
+animate(dynamic_plot, renderer = gifski_renderer())  # Show the plot
+
+# Q3.1.12 -----------------------------------------------------------------------
+
+# plot the price of a stock in 2023 that increased that year
+
+# Install and load the quantmod package that includes the getSympols() and
+# chart_Series functions
+install.packages("quantmod")
+library(quantmod)
+
+# Method one: Load the data about the Nvidia prices only from 2023
+getSymbols("NVDA", from="2023-01-01", to="2023-12-31")
+chart_Series(NVDA) # Plot the prices
+
+# OR
+# Method two: Load all the data about the Nvidia prices
+getSymbols("NVDA")
+chart_Series(NVDA, subset="2023") # Plot only prices from 2023
+
+# The plotted price is the price of stock of Nvidia Corporation. They are a
+# technology company that produce software, design and sale hardware devices and
+# semiconductor chips. Their products relates mainly to graphic computation and
+# artificial intelligence. 
+
+# Q3.1.13 -----------------------------------------------------------------------
+
+# The plotstock function that takes as arguments a stock symbol, a year,
+# and a new file name. The function creates a plot of the given stock’s price
+# development in the given year, and saves the plot in a file with the given
+# file name. The default stock is GOOG, the default year in the last full year
+# from today and the default file name is of the following form:
+# SYMBOL_prices_YEAR.png (e.g. for GOOG and year 2023 it is:
+# GOOG_prices_2023.png)
+
+plotstock <- function(
+    stock = "GOOG",
+    year = as.numeric(format(Sys.time(), "%Y")) - 1,
+    file = paste0(stock, "_prices_", as.character(year),".png")
+){
+  prices <- getSymbols(stock, auto.assign = FALSE)  # Save the stock's prices
+  png(file)  # Create the plot and save it
+  print({
+    chart_Series(prices, subset=as.character(year), name=stock)
+  })
+  dev.off()
+}
+
+plotstock("F", "2011")
+
+# Q3.1.14 -----------------------------------------------------------------------
+
+# Q3.1.1. improved
+
+# Simulation of realistic grades for the programming exam
+
+# What does "realistic grades" mean?
+# The grades have to be between 1 and 10 and rounded off to half numbers
+# The mean grade should be around 7 - 7.5
+# The grades 1, 2 and 3 should be very rare, and the grades 9.5 and 10 should be
+# quite rare as well
+
+# The normal distribution with the mean of 7.5 and the standard deviation of 1.5
+# truncated to the range [1, 10] seems to roughly fulfill the criteria above
+
+# Notice that the real mean of such a distribution will be lower than 7.5
+# because the truncation is not symmetric. The distance between the mean and the
+# lower bound is larger than the distance between the mean and the upper bound.
+# Overrepresentation of lower values will drive the mean towards values lower
+# than 7.5.
+
+grades <- numeric(0)
+for (i in 1:70) {
+  grade <- 0
+  while(grade < 1 || grade > 10) {
+    grade <- rnorm(1, mean = 7.5, sd = 1.5)
+  }
+  grades <- c(grades, grade)
+}
+
+grades <- round(grades * 2) / 2  # To get the grades rounded off to half numbers
+
+hist(
+  grades,
+  main = "Grades from programming exam",
+  xlab = "Grades",
+  ylab = "Frequency",
+  las = 1) 
+
+# Edits
+#1. Comments to 80 characters, more concise
+#2. Get rid off unnecesary comments
+#3. A space after for and while
+#4. { in line with for
+#5. <- instead of = in grade assignment
+#6. || insted of |
+#7. Space between while() and {
+#8. Spaces around /
+#9. Hist arguments
+
+# Q3.1.11. improved
+
+# To make animated plots
+install.packages("gganimate")
+library(gganimate)
+
+# To download the data needed
+install.packages("cranlogs")
+library(cranlogs)
+
+# To renders the animated tools in the gif format
+install.packages("gifski")
+library(gifski)
+
+# The data about the ggplot2 and plotly download statistics
+downloads <- cran_downloads(
+  packages = c("ggplot2", "plotly"),
+  from = "2013-07-01",
+  to = "2024-01-23"
+)
+
+dynamic_plot <- ggplot(downloads, aes(x = date, y = count, colour = package)) +
+  geom_line() +
+  theme_bw() +
+  transition_reveal(along = date)
+
+animate(dynamic_plot, renderer = gifski_renderer())
+
+# Edits
+#1. Delete full stops in one-sentence comments
+#2. More concise comments on emphasis on "why"
+#3. Spacesa around =
+#4. Delete comments that are redundant to people how know R
+#5. Packages left
+
+# Q3.1.15 -----------------------------------------------------------------------
+
+# The code from the assignment
+a <- "dog"
+b = "cat"
+v = function(x){
+  xx <- strsplit(x, "", )[[1]]
+  yy <- strsplit(b, "", )[[1]]
+  lxx = length(xx)
+  lyy = length(yy)
+  v <- lxx == lyy
+  if(v) return(T)
+}
+v(a)
+
+# The purpose of this function
+# This function takes a string as its arguments, checks if it has as many
+# characters as the globally defined string called b and returns TRUE, when it
+# is true (when b does not exist, an error appears).
+
+# Why the code has very poor style?
+#1. Uninformative variable names
+#2. Sometimes assignment is done by "=" instead of "<-"
+#3. There should be spaces after function(x) and before {, and after if and
+# before (v)
+#4. The return function should go in its own {} block in its own line
+#5. TRUE is prefered over T
+
+# Q3.1.16 -----------------------------------------------------------------------
+
+matrix(c(1:9), nrow = 3, ncol = 3, byrow = TRUE) * c(1,2,3)
+
+# Q3.1.17 -----------------------------------------------------------------------
+
+# Ctrl + Shift + A
+
+# Q3.1.18 -----------------------------------------------------------------------
+
+# Install and load the memery package that allows making memes in R
+install.packages("memery")
+library(memery)
+
+# Install and load the magick package that allows memery to make animated memes.
+install.packages("magick")
+library(magick)
+
+
+gif <- paste0("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdnZ", "wcjBwenExdm94cHZyaXFoeTJhd2NiMHk0ZXV1aXlzcGg1c2R3bCZlcD12MV9pbnRlcm", 
+              "5hbF9naWZfYnlfaWQmY3Q9Zw/l41lQpaXZo7GGWD0k/giphy.gif")
+
+lab <- c("Teachers: Simulate a typing monkey", "My monkey:")  # captions
+
+# Positioning of the captions
+pos <- list(w = c(1, 1), h = c(1, 1), x = c(0.495,0.18), y = c(0.92, 0.78))
+# Getting rid of the default white box in a gif
+pos2 <- inset_position("bl", size = c(0, 0))
+
+meme_gif(
+  gif,
+  lab,
+  "monkey.gif",  # The gif is saved in the current working directory
+  size = c(0.55, 0.55),  # Captions size
+  label_pos = pos,
+  inset_pos = pos2,
+  fps = 15
+)
+
+# I am fine with posting my meme.
+
+
+
+
