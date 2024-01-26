@@ -1,3 +1,4 @@
+-----------------------------------------------------------------------
 # Simulation of realistic grades for the programming exam
 
 # First, consider what does "realistic grades" mean
