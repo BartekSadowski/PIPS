@@ -56,8 +56,8 @@ similar to `"lines"` but some of the stripes are vertical there and they
 meet with horizontal ones in a way that resembles a right angle.
 
 `"squares"` gives you an image created of smaller, colourful squares
-organized in a grid. The size and number squares as well as their
-colours are randomly determined. Moreover, half of the time, the
+organized in a grid. The size and number of squares as well as their
+colours are randomly determined. Moreover, half of the time the
 generated squares will be rotated by a random angle. To achieve the best
 effect of this kind of art, it is recommended to set smaller
 `inner_canvas` relative to `outer_canvas`.
@@ -66,7 +66,7 @@ effect of this kind of art, it is recommended to set smaller
 the common pattern that are randomly located across the canvas. As the
 location, their size, amount and colours are determined randomly.
 
-Note that some kinds of art might render slightly longer then other.
+Note that some kinds of art might render slightly longer then others.
 
 </div>
 
