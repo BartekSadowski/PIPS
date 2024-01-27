@@ -3,11 +3,6 @@ make_art()
 Bartłomiej Sadowski
 2024-01-27
 
-<style>
-div {
-text-align: justify}
-</style>
-
 <br>
 
 # Make art in R
@@ -33,7 +28,7 @@ make_art(seed, art_type = "random", outer_canvas = 1000, inner_canvas = outer_ca
 
 ## Arguments
 
-<div>
+<div style="text-align: justify;">
 
 |                |                                                                                                                                                                                                                                                                                                                                                                                                                              |
 |----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -47,7 +42,7 @@ make_art(seed, art_type = "random", outer_canvas = 1000, inner_canvas = outer_ca
 
 ## Details
 
-<div>
+<div style="text-align: justify;">
 
 `make_art()` produces four kinds of art: `"lines"`, `"angles"`,
 `"squares"` and `"patches"`. If you want to generate any particular kind

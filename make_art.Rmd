@@ -4,10 +4,6 @@ author: "Bartłomiej Sadowski"
 date: "2024-01-27"
 output: github_document
 ---
-<style>
-div {
-text-align: justify}
-</style>
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -37,7 +33,7 @@ make_art(seed, art_type = "random", outer_canvas = 1000, inner_canvas = outer_ca
 
 ## Arguments
 
-<div>
+<div style = "text-align: justify;">
 |   |   |
 |---|---|
 |`seed`   |You can optionally specify a random seed to make your art reproducible. By default no value of the random seed is prespecified. See `?set.seed` for more information.  |
@@ -49,7 +45,7 @@ make_art(seed, art_type = "random", outer_canvas = 1000, inner_canvas = outer_ca
 
 ## Details
 
-<div>
+<div style = "text-align: justify;">
 `make_art()` produces four kinds of art: `"lines"`, `"angles"`, `"squares"` and `"patches"`. If you want to generate any particular kind of art, specify it in the `art_type` argument by assigning the name of a kind of art that you are interested in. If you do not assign any vale or you assign a different value then one of the four listed above, `make_art()` will draw a type of art for you.
 
 `"lines"`gives you an image of horizontal stripes of different hues from a randomly generated gradient of colours. `"angles" creates something similar to `"lines"` but here some of the stripes are vertical and they meet with horizontal one is a way that resembles a right angle.
