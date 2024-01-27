@@ -59,7 +59,8 @@ make_art <- function(seed,
     art_type <- sample(c("lines", "angles", "squares", "patches"),1)
   }
   
-  print(art_type)
+  print(paste0("art type: ", art_type))
+  print("creating...")
   if (art_type == "lines") {
     art[initial:(outer_canvas - initial), initial] <<- 500
     for(i in initial:(inner_canvas + initial - 1)) {
@@ -89,7 +90,7 @@ make_art <- function(seed,
   if (art_type == "squares") {
     number_of_colors <- sample(5:20, 1)
     square_colors <<- 1:number_of_colors
-    square_size <<- sample(floor(inner_canvas/200):floor(inner_canvas/10), 1)
+    square_size <<- sample(floor(inner_canvas/500):floor(inner_canvas/10), 1)
     squares_in_line <<- floor(inner_canvas / square_size)
     coords <<- c((outer_canvas - inner_canvas) / 2, (outer_canvas - inner_canvas) / 2)
     for(i in 1:squares_in_line) {
@@ -133,6 +134,7 @@ make_art <- function(seed,
   #Plotting
   if (art_type == "squares" || art_type == "patches") {
     art_data <<- reshape2::melt(art)
+    print("plotting...")
     x11()
     p <<- ggplot(art_data, aes(x = Var2, y = Var1)) + 
       geom_raster(aes(fill=factor(round(value)))) + 
@@ -143,13 +145,13 @@ make_art <- function(seed,
             axis.title.y=element_blank(),legend.position="none",
             panel.background=element_blank(),panel.border=element_blank(),panel.grid.major=element_blank(),
             panel.grid.minor=element_blank(),plot.background=element_blank())
-    print("printing..")
     print(p)
     #ggsave("plot.png", width = 1000, height = 1000, units = "px")
   }
   gradient_colors <- sample(colors(),2)
   if (art_type == "lines" || art_type == "angles") {
     art_data <<- melt(art)
+    print("plotting...")
     x11()
     p <- ggplot(art_data, aes(x = Var2, y = Var1)) + 
       geom_raster(aes(fill=value)) + 
@@ -163,4 +165,5 @@ make_art <- function(seed,
     
     print(p)
   }
+  print("Done!")
 }
