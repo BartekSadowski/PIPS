@@ -1,3 +1,16 @@
+## This file is published on github:
+## https://github.com/BartekSadowski/PIPS/blob/main/functions_assignment_3_2R.R
+
+## Functions to Assignmnet 3.2R
+## 2024 Programming in Psychological Science (PIPS)
+#
+# Record of Revisions
+#
+# Date        Programmer            Descriptions of Change
+# ====        ================      ======================
+# 27-Jan-24   Bartłomiej Sadowski   Original code
+
+
 # Function to remind me of my shopping list
 remind_me <- function(){
   shopping <- data.frame(
