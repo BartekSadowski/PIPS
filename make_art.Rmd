@@ -99,7 +99,7 @@ make_art(art_type = "patches", outer_canvas = 1100, inner_canvas = 800)
 
 ## The end!
 
-Now you now everything about `make_art()` function and you can become an Rtist! Happy painting! :)
+Now you know everything about `make_art()` and you can become an Rtist! Happy painting! :)
  
  <br>
  <br>
