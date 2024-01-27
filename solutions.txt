@@ -52,20 +52,29 @@ hist(
 
 temp <- read.csv("https://bit.ly/3GLVQ86")  # load the data
 
-head(temp)  #Let's take a look what is in the data
-
+View(temp)  #Let's take a look what is in the data
 # Let's see if Schiphol is the only place where temperature was meassured.
 unique(temp$NAME) # Answer: yes
 
 # Let's see what dates are in the data
 dim.data.frame(temp)
-min(temp$DATE)
-max(temp$DATE)
-# The temperature was measured over 70 years from 1951 to 2021 (in 2021 it's NA)
+min(temp$DATE) # 1951
+max(temp$DATE) # 2021
+# The temperature was measure over 71 years from 1951 to 2021 (inclusive)
 
-# The scatter plot
-plot(temp$DATE,
-     temp$TMIN,
+sum(is.na(temp$TMIN)) # there is one NA for TMIN
+temp[is.na(temp$TMIN), "DATE"] # NA is in 2021
+
+# Thus the data contain the minimum temperature measurements from 1951 to 2020
+# (70 years)
+
+# The scatter plot of the minimum temperature from 1951 to 2020
+dates <- temp[!is.na(temp$TMIN), "DATE"]
+min_temps <- temp[!is.na(temp$TMIN), "TMIN"]
+
+
+plot(dates,
+     min_temps,
      main = "Minimum temperature at Schiphol Airport between 1951 and 2020",
      xlab = "Year",
      ylab = "Temperature [°C]") 
@@ -158,9 +167,9 @@ ggplot(titanic_train, aes(Sex))+
 plot(cars$speed, cars$dist)
 
 # What does those variables mean?
-? cars
-? plot
-# The impoved plot
+?cars
+?plot
+# The improved plot
 plot(
   cars$speed,
   cars$dist,
