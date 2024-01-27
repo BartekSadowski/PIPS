@@ -29,7 +29,11 @@ cheat <- function(exercise) {
 make_art <- function(seed,
                      art_type = "random",
                      outer_canvas = 1000,
-                     inner_canvas = 1000) {
+                     inner_canvas = outer_canvas) {
+  if(inner_canvas > outer_canvas) {
+    stop("Sorry, your art cannot be generated. inner_canvas cannot be larger that outer_canvas")
+  }
+  
   if(!missing(seed)) {
     set.seed(seed)
   }
